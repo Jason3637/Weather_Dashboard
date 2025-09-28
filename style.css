@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 * {
     margin: 0;
@@ -10,14 +10,14 @@
 }
 
 body {
-    background: url(Assets/institute_of_business_studies_png_cover.jpeg);
+    background: url(Assets/institute_of_business_studies_png_cover.jpeg) center/cover no-repeat;
     width: 100%;
     height: 100vh;
-    background-size: cover;
-    background-position: center;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    overflow: hidden;
 }
 
 body::before {
@@ -26,9 +26,10 @@ body::before {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background: rgba(0, 0, 0, 0.15);
     backdrop-filter: blur(2px);
+    z-index: 0;
 }
 
 /* UTILITIES */
@@ -38,18 +39,17 @@ body::before {
 /* END UTILITIES */
 
 .main-container {
-    border: solid;
     width: 300px;
     height: 496px;
     z-index: 1;
-    background: linear-gradient
-        (to top, rgb(0, 0, 0, 0.15), rgb(255, 255, 255, 0.15));
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.15), rgba(255, 255, 255, 0.15));
     border-radius: 12px;
     backdrop-filter: blur(100px);
     padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/*INPUT CONTATINER*/
+/* INPUT CONTAINER */
 .input-container {
     position: relative;
     margin-bottom: 25px;
@@ -60,18 +60,18 @@ body::before {
     padding: 10px 16px;
     border-radius: 99px;
     border: 3px solid transparent;
-    background: rgb(0, 0, 0, 0.15);
+    background: rgba(0, 0, 0, 0.15);
     outline: none;
     font-weight: 500;
     transition: 0.25s border;
 }
 
 .city-input:focus {
-    border: 3px solid rgb(0, 0, 0, 0.15);
+    border: 3px solid rgba(0, 0, 0, 0.3);
 }
 
 .city-input::placeholder {
-    color: rgb(255, 255, 255, 0.75);
+    color: rgba(255, 255, 255, 0.75);
     font-weight: 500;
     font-size: 16px;
 }
@@ -86,7 +86,70 @@ body::before {
     border: none;
     cursor: pointer;
 }
-/*END INPUT CONTATINER*/
+
+/* SUGGESTIONS DROPDOWN */
+.suggestions-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(20px);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 10;
+    margin-top: 5px;
+}
+
+.suggestions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.suggestion-item {
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-weight: 400;
+}
+
+.suggestion-item:last-child {
+    border-bottom: none;
+}
+
+.suggestion-item:hover,
+.suggestion-item.highlighted {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.suggestion-city {
+    font-weight: 500;
+    color: #ffffff;
+}
+
+/* Custom scrollbar for suggestions */
+.suggestions-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.suggestions-container::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+}
+
+.suggestions-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+}
+
+.suggestions-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+/* END INPUT CONTAINER */
 
 /* SECTION: WEATHER INFO */
 .weather-info {
@@ -149,18 +212,18 @@ body::before {
 }
 
 .forecast-items-container::-webkit-scrollbar-track{
-    background: rgb(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.1);
     border-radius: 99px;
 }
 
 .forecast-items-container::-webkit-scrollbar-thumb{
-    background: rgb(0, 0, 0, 0.15);
+    background: rgba(0, 0, 0, 0.15);
     border-radius: 99px;
 }
 
 .forecast-item{
     min-width: 70px;
-    background: rgb(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.1);
     display: flex;
     flex-direction: column;
     gap: 6px;
@@ -170,8 +233,8 @@ body::before {
     transition: 0.3s background;
 }
 
-.forecast.item:hover{
-    background: rgb(255, 255, 255, 0.15);
+.forecast-item:hover{
+    background: rgba(255, 255, 255, 0.15);
 }
 
 .forecast-item img{
@@ -183,7 +246,7 @@ body::before {
 
 /* SECTION: MESSAGE*/
 
-.section-messsage{
+.section-message{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -192,7 +255,7 @@ body::before {
     margin-top: 25%;
 }
 
-.section-messsage img{
+.section-message img{
     height: 180px;
     width: fit-content;
 }
